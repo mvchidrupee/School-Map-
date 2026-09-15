@@ -10,10 +10,11 @@ Original file is located at
 import streamlit as st
 #nested list of all hallways with the rooms in each
 Means_Of_Transportation = [
-    ["Cafeteria", "Stage", "Office", "1", "Front restroom", "Counselors", "Gym","2","3","4","5","6","7","8","9","10","11","12"],
-    [ "Media Center", "16", "Back restroom"],
-    ["24","26","27","28","29","31","30","32","34","35"],
-    ["2", "Commons", "Gym", "33"],
+    ["Cafeteria", "Office", "1", "Front restroom", "Counselor", "Gym", "3","4","5","6","7","8","9","10","11","12"],
+    ["Media Center", "16", "Back restroom"],
+    ["24","26","27","28","29","30","31","32"],
+    ["2", "Commons", "33"],
+    ["34","35"],
     ["36","37","38"]
     ]
 
@@ -28,13 +29,19 @@ def dropdown (title, options):
   for option in options:
     st.write(f"[{number} ] {option}")
     number = number + 1
-
     #Get the user's choice
   choice_text = st.text_input("Select an option: ")
 
+
+#running the function
+start = dropdown("Where are you right now? Choose Hallway 1-6", Means_Of_Transportation)
+end = dropdown("Where is your destination? Choose Hallway 1-6", Means_Of_Transportation)
+
+def check (room):
     #Check the input
   try:
-    choice_number = int(choice_text)
+    start = int(choice_text)
+      end = int(choice_text)
 
     #Check if the number fits inside our list boundaries
     if choice_number >= 1:
@@ -42,6 +49,7 @@ def dropdown (title, options):
     #Find the item (subtract 1 because lists start at 0)
         index = choice_number - 1
         return options[index]
+    
 
   except ValueError:
     #This runs if the user typed letters or something else instead of a number
@@ -50,7 +58,7 @@ def dropdown (title, options):
     # If the code reaches this point, the input was invalid
       st.write("Invalid selection. Please try again.")
 
-
+check()
 
 
 #running the function
