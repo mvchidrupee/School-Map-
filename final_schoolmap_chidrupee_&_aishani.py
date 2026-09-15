@@ -7,6 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1N_zCtiIMh9KtXU016vn6is_kBYA_DU1E
 """
 
+import streamlit as st
 #nested list of all hallways with the rooms in each
 Means_Of_Transportation = [
     ["Cafeteria", "Stage", "Office", "1", "Front restroom", "Counselors", "Gym","2","3","4","5","6","7","8","9","10","11","12"],
@@ -18,14 +19,14 @@ Means_Of_Transportation = [
 
 #creating a dropdown menu
 def dropdown (title, options):
-  print(f"\n {title}") #print whats in variable "title" on a new line
+  st.write(f"\n {title}") #print whats in variable "title" on a new line
   #while run_program: #this creates an infinite loop that always runs unless intentionally stopped
     #Print the header
-  print(title)
+  st.write(title)
     #Print the options using a counter
   number = 1
   for option in options:
-    print(f"[{number} ] {option}")
+    st.write(f"[{number} ] {option}")
     number = number + 1
 
     #Get the user's choice
@@ -47,7 +48,7 @@ def dropdown (title, options):
       pass
 
     # If the code reaches this point, the input was invalid
-      print("Invalid selection. Please try again.")
+      st.write("Invalid selection. Please try again.")
 
 
 
@@ -70,8 +71,8 @@ directions = {
 
 #if the hallways of start and end location are the same
 if start == end:
-  print("You are on the right hallway. The classroom numbers are on the ceiling.")
+  st.write("You are on the right hallway. The classroom numbers are on the ceiling.")
 
 #if they are different hallway, then use dictionary to print directions
 else:
-  print(directions[start][end])
+  st.write(directions[start][end])
