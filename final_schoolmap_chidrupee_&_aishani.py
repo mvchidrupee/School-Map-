@@ -8,6 +8,9 @@ Original file is located at
 """
 
 import streamlit as st
+
+st.title("School Map Program")
+
 #nested list of all hallways with the rooms in each
 Means_Of_Transportation = [
     ["Cafeteria", "Office", "1", "Front restroom", "Counselor", "Gym", "3","4","5","6","7","8","9","10","11","12"],
@@ -18,52 +21,14 @@ Means_Of_Transportation = [
     ["36","37","38"]
     ]
 
-#creating a dropdown menu
-def dropdown (title, options):
-  st.write(f"\n {title}") #print whats in variable "title" on a new line
-  #while run_program: #this creates an infinite loop that always runs unless intentionally stopped
-    #Print the header
-  st.write(title)
-    #Print the options using a counter
-  number = 1
-  for option in options:
-    st.write(f"[{number} ] {option}")
-    number = number + 1
-    #Get the user's choice
-  choice_text = st.text_input("Select an option: ")
-
+# Create readable strings of the lists inside the big nested list for the dropdown
+dropdown_options = [str(hallway) for hallway in Means_Of_Transportation]
 
 #running the function
-start = dropdown("Where are you right now? Choose Hallway 1-6", Means_Of_Transportation)
-end = dropdown("Where is your destination? Choose Hallway 1-6", Means_Of_Transportation)
-
-def check (room):
-    #Check the input
-  try:
-    start = int(choice_text)
-      end = int(choice_text)
-
-    #Check if the number fits inside our list boundaries
-    if choice_number >= 1:
-      if choice_number <= len(options):
-    #Find the item (subtract 1 because lists start at 0)
-        index = choice_number - 1
-        return options[index]
-    
-
-  except ValueError:
-    #This runs if the user typed letters or something else instead of a number
-      pass
-
-    # If the code reaches this point, the input was invalid
-      st.write("Invalid selection. Please try again.")
-
-check()
-
-
-#running the function
-start = dropdown("Where are you right now? Choose Hallway 1-6", Means_Of_Transportation)
-end = dropdown("Where is your destination? Choose Hallway 1-6", Means_Of_Transportation)
+start = st.selectbox("Where are you right now?", dropdown_options)
+start_l = dropdown_options.index(start)
+end = st.selectbox("Where is your destination?", dropdown_options)
+end_l = dropdown_options.index(end) # Fixed typo: changed 'start' to 'end'
 
 #adding a dictionary to give directions from each possible starting location to each possible ending location
 directions = {
@@ -73,14 +38,14 @@ directions = {
     4: {1:"Walk towards room 2 and turn at the intersection." , 2: "Walk in the opposite direction from entrance, turn left. Then walk towards room 24 and turn left." , 3: "Walk in the opposite direction from entrance, turn left.", 5:"Walk in the opposite direction from entrance, take first right. " , 6: "Walk in the opposite direction from entrance, take second right."},
     5: {1: "Walk towards room 34, turn left. Then walk towards room 2 and turn at the intersection." , 2: "Walk stright past room 34 and towards room 24. Then turn left." , 3:"Walk straight past room 34." , 4: "Walk towards room 34, turn left." , 6: "Walk towards room 34, turn right. And then turn right again at the end of the hallway." },
     6: {1: "Walk towards room 36 and turn left. Then walk towards room 2 and turn at the intersection." , 2: "Walk towards room 36 and turn left. Take the left after room 33. Then walk towards room 24 and turn left." , 3: "Walk towards room 36 and turn left. Take the left after room 33.", 4: "Walk towards room 36 and turn left. Walk straight past room 33.", 5:"Walk towards room 36 and turn left. Walk straight and take first left." }
-
-
 }
 
 #if the hallways of start and end location are the same
-if start == end:
+if start_l == end_l:
   st.write("You are on the right hallway. The classroom numbers are on the ceiling.")
 
 #if they are different hallway, then use dictionary to print directions
 else:
-  st.write(directions[start][end])
+  # Added + 1 to shift 0-5 index up to match your 1-6 dictionary keys
+  st.write(directions[start_l + 1][end_l + 1])
+
