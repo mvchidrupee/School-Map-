@@ -30,7 +30,7 @@ def dropdown (title, options):
     number = number + 1
 
     #Get the user's choice
-  choice_text = input("Select an option: ")
+  choice_text = st.text_input("Select an option: ")
 
     #Check the input
   try:
