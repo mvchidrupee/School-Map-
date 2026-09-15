@@ -41,7 +41,7 @@ def dropdown (title, options):
       if choice_number <= len(options):
     #Find the item (subtract 1 because lists start at 0)
         index = choice_number - 1
-        return options[index], choice_number
+        return options[index]
 
   except ValueError:
     #This runs if the user typed letters or something else instead of a number
