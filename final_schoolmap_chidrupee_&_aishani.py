@@ -54,8 +54,8 @@ def dropdown (title, options):
 
 
 #running the function
-start_question, start = dropdown("Where are you right now? Choose Hallway 1-6", Means_Of_Transportation)
-end_question, end = dropdown("Where is your destination? Choose Hallway 1-6", Means_Of_Transportation)
+start = dropdown("Where are you right now? Choose Hallway 1-6", Means_Of_Transportation)
+end = dropdown("Where is your destination? Choose Hallway 1-6", Means_Of_Transportation)
 
 #adding a dictionary to give directions from each possible starting location to each possible ending location
 directions = {
